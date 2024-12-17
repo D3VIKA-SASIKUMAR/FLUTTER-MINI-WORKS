@@ -10,6 +10,7 @@ class NowPlayingScreen extends StatefulWidget {
 }
 
 class _NowPlayingScreenState extends State<NowPlayingScreen> {
+  int indexNum = 0;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -160,30 +161,6 @@ class _NowPlayingScreenState extends State<NowPlayingScreen> {
               ),
             ],
           ),
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          selectedItemColor: Colors.black,
-          type: BottomNavigationBarType.fixed,
-          currentIndex: 0,
-          iconSize: 40,
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.search),
-              label: 'Search',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.library_music),
-              label: 'Library',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.local_fire_department_sharp),
-              label: 'Hotlist',
-            ),
-          ],
         ),
       ),
     );
