@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class WhatsApp extends StatefulWidget {
-  const WhatsApp({super.key});
+class HomeScreenWhatsApp extends StatefulWidget {
+  const HomeScreenWhatsApp({super.key});
 
   @override
-  State<WhatsApp> createState() => _WhatsAppState();
+  State<HomeScreenWhatsApp> createState() => _HomeScreenWhatsAppState();
 }
 
-class _WhatsAppState extends State<WhatsApp> {
+class _HomeScreenWhatsAppState extends State<HomeScreenWhatsApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -221,36 +221,6 @@ class _WhatsAppState extends State<WhatsApp> {
           backgroundColor: const Color.fromARGB(255, 29, 171, 97),
           foregroundColor: Colors.white,
           onPressed: () {}),
-      bottomNavigationBar: NavigationBar(
-        backgroundColor: Colors.white,
-        indicatorColor: const Color.fromARGB(255, 216, 253, 210),
-        destinations: [
-          NavigationDestination(
-              icon: Icon(
-                Icons.chat,
-                color: Color.fromARGB(255, 22, 100, 68),
-              ),
-              label: 'Chats'),
-          NavigationDestination(
-              icon: Icon(
-                Icons.update,
-                color: Color.fromARGB(255, 0, 0, 0),
-              ),
-              label: 'Updates'),
-          NavigationDestination(
-              icon: Icon(
-                Icons.groups,
-                color: Color.fromARGB(255, 0, 0, 0),
-              ),
-              label: 'Communities'),
-          NavigationDestination(
-              icon: Icon(
-                Icons.phone,
-                color: Color.fromARGB(255, 0, 0, 0),
-              ),
-              label: 'Calls'),
-        ],
-      ),
     );
   }
 }
