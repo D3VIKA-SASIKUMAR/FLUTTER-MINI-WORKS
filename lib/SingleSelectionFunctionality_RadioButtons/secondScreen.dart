@@ -21,7 +21,7 @@ class _SecondscreenState extends State<Secondscreen> {
             children: [
               Row(
                 children: [
-                  Text("Q1: What is the capital of France?",
+                  Text("66: What is the capital of France?",
                       style: TextStyle(fontSize: 18)),
                 ],
               ),

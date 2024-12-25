@@ -1,10 +1,10 @@
 # flutter_mini
 
-A new Flutter project.
+Mini_works
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+just some mini works 
 
 A few resources to get you started if this is your first Flutter project:
 
