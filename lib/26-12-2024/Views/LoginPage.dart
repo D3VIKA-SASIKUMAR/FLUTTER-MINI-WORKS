@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mini/26-12-2024/Services/submit.dart';
 import 'package:flutter_mini/26-12-2024/Services/validation.dart';
-import 'package:flutter_mini/26-12-2024/Views/HomePage.dart';
+
 import 'package:flutter_mini/26-12-2024/Widgets/Buttons.dart';
 import 'package:flutter_mini/26-12-2024/Widgets/TextformField.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -42,7 +42,12 @@ class LoginPage extends StatelessWidget {
                 const SizedBox(height: 20),
                 Butttons(
                   text: 'Login',
-                  onPressed: () => submit(context),
+                  onPressed: () => LoginService.submit(
+                    context: context,
+                    formKey: _formKey,
+                    usernameController: _usernameController,
+                    passwordController: _passwordController,
+                  ),
                 ),
               ],
             ),
@@ -50,24 +55,5 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  void submit(BuildContext context) async {
-    if (_formKey.currentState!.validate()) {
-      bool success = await Validationn.login(
-        _usernameController.text,
-        _passwordController.text,
-      );
-
-      if (success) {
-        Fluttertoast.showToast(msg: 'Login successful!');
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const HomePage()),
-        );
-      } else {
-        Fluttertoast.showToast(msg: 'Invalid username or password');
-      }
-    }
   }
 }
