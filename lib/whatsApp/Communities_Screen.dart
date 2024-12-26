@@ -49,14 +49,7 @@ class _CommunitiesScreenWhatsAppState extends State<CommunitiesScreenWhatsApp> {
         padding: const EdgeInsets.all(18.0),
         child: Column(children: [
           Stack(clipBehavior: Clip.none, children: <Widget>[
-            Container(
-              height: 70.0,
-              width: 70.0,
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(30)),
-              color: Color.fromARGB(255, 131, 130, 130),
-              child: Icon(Icons.groups, color: Colors.white, size: 50.0),
-            ),
+            Icon(Icons.groups, color: Colors.white, size: 50.0),
             Positioned(
                 top: 40.0,
                 left: 50,
