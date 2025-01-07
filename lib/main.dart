@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mini/26-12-2024/Views/LoginPage.dart';
-import 'package:flutter_mini/26-12-2024/Widgets/TextformField.dart';
-import 'package:flutter_mini/whatsApp/NavigationBar.dart';
+
+import 'package:flutter_mini/7-01-2024/screen1.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +11,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false, home: WhatsAppNavigationBar());
+    return MaterialApp(debugShowCheckedModeBanner: false, home: FirstPage());
   }
 }
