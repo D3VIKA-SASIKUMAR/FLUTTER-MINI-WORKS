@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'package:flutter_mini/7-01-2024/screen1.dart';
+import 'package:flutter_mini/FakeStoreAPI/category.dart';
+import 'package:flutter_mini/StoreFake/fakestore.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,6 +11,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: FirstPage());
+    return MaterialApp(debugShowCheckedModeBanner: false, home: StoreFake());
   }
 }
