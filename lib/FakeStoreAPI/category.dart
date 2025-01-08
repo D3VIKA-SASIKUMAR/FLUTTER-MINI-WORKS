@@ -1,75 +1,97 @@
-// pages/home_page.dart
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_mini/FakeStoreAPI/apiservices.dart';
-import 'package:flutter_mini/FakeStoreAPI/product_page.dart';
+import 'package:flutter_mini/FakeStoreAPI/electronics.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+import 'package:http/http.dart' as http;
+
+class CategoriesPage extends StatefulWidget {
+  const CategoriesPage({Key? key}) : super(key: key);
+
+  @override
+  State<CategoriesPage> createState() => _CategoriesPageState();
+}
+
+class _CategoriesPageState extends State<CategoriesPage> {
+  List<String> _categories = [];
+  bool isLoading = true;
+
+  Future<void> fetchCategories() async {
+    try {
+      final response = await http.get(
+        Uri.parse('https://fakestoreapi.com/products/categories'),
+      );
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        setState(() {
+          _categories = List<String>.from(data);
+          isLoading = false;
+        });
+      } else {
+        throw Exception('Failed to load categories');
+      }
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+      print('Error fetching categories: $e');
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchCategories();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Categories')),
-      body: FutureBuilder<List<dynamic>>(
-        future: ApiService.fetchCategories(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
+      backgroundColor: const Color.fromARGB(255, 49, 36, 31),
+      appBar: AppBar(
+          backgroundColor: const Color.fromARGB(255, 30, 68, 32),
+          title: const Text(
+            'Categories',
+            style: TextStyle(color: Colors.white),
+          )),
+      body: isLoading
+          ? const Center(
               child: CircularProgressIndicator(),
-            );
-          } else if (snapshot.hasError) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    'Something went wrong!',
-                    style: TextStyle(fontSize: 18, color: Colors.red),
-                  ),
-                  const SizedBox(height: 8),
-                  ElevatedButton(
-                    onPressed: () {
-                      // Force the widget to rebuild by re-triggering the FutureBuilder
-                      (context as Element).reassemble();
-                    },
-                    child: const Text('Retry'),
-                  ),
-                ],
-              ),
-            );
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(
-              child: Text(
-                'No categories found.',
-                style: TextStyle(fontSize: 16),
-              ),
-            );
-          }
+            )
+          : _categories.isEmpty
+              ? const Center(
+                  child: Text('No categories found.'),
+                )
+              : ListView.builder(
+                  itemCount: _categories.length,
+                  itemBuilder: (context, index) {
+                    final category = _categories[index];
 
-          final categories = snapshot.data!;
-          return ListView.builder(
-            itemCount: categories.length,
-            itemBuilder: (context, index) {
-              final category = categories[index];
-              return Card(
-                margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                child: ListTile(
-                  title: Text(category),
-                  trailing: const Icon(Icons.arrow_forward_ios),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ProductsPage(category: category),
+                    return Card(
+                      margin: const EdgeInsets.symmetric(
+                        vertical: 10,
+                        horizontal: 5,
+                      ),
+                      child: ListTile(
+                        title: Text(
+                          category,
+                          style: const TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                        onTap: () {
+                          // Navigate to the ProductsPage with the selected category
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  ProductsPage(category: category),
+                            ),
+                          );
+                        },
                       ),
                     );
                   },
                 ),
-              );
-            },
-          );
-        },
-      ),
     );
   }
 }
