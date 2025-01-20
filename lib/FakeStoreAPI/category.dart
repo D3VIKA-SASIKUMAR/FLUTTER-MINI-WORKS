@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_mini/FakeStoreAPI/electronics.dart';
+import 'package:flutter_mini/FakeStoreAPI/products.dart';
 
 import 'package:http/http.dart' as http;
 
@@ -12,7 +12,7 @@ class CategoriesPage extends StatefulWidget {
 }
 
 class _CategoriesPageState extends State<CategoriesPage> {
-  List<String> _categories = [];
+  List<dynamic> _categories = [];
   bool isLoading = true;
 
   Future<void> fetchCategories() async {
@@ -24,7 +24,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
         setState(() {
-          _categories = List<String>.from(data);
+          _categories = List<dynamic>.from(data);
           isLoading = false;
         });
       } else {
@@ -65,7 +65,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
               : ListView.builder(
                   itemCount: _categories.length,
                   itemBuilder: (context, index) {
-                    final category = _categories[index];
+                    final categoryy = _categories[index];
 
                     return Card(
                       margin: const EdgeInsets.symmetric(
@@ -74,17 +74,16 @@ class _CategoriesPageState extends State<CategoriesPage> {
                       ),
                       child: ListTile(
                         title: Text(
-                          category,
+                          categoryy,
                           style: const TextStyle(
                               fontSize: 16, fontWeight: FontWeight.bold),
                         ),
                         onTap: () {
-                          // Navigate to the ProductsPage with the selected category
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) =>
-                                  ProductsPage(category: category),
+                                  ProductsPage(category: categoryy),
                             ),
                           );
                         },

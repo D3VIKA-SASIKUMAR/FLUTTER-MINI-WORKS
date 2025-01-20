@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'package:flutter_mini/FakeStoreAPI/category.dart';
+import 'package:flutter_mini/getx_txtfrmfild/views/mainScreen.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false, home: CategoriesPage());
+    return GetMaterialApp(
+        debugShowCheckedModeBanner: false, home: Mainscreen());
   }
 }

@@ -13,7 +13,10 @@ class ProductsPage extends StatefulWidget {
 class _ProductsPageState extends State<ProductsPage> {
   List<dynamic> _products = [];
   bool isLoading = true;
-
+//fetchProducts Method: Fetches products from the API based on the selected category.
+//Uri.parse: Constructs the URL dynamically by injecting the category using widget.category.
+//Example: For the "electronics" category, the URL becomes:
+//https://fakestoreapi.com/products/category/electronics.
   Future<void> fetchProducts() async {
     try {
       final response = await http.get(
